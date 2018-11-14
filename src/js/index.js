@@ -1,9 +1,9 @@
 require('../scss/index.scss');
 import { roundTo } from './util';
 
-const a = window.innerWidth / 2;
+const a = window.innerWidth * 0.9 / 2;
 const A = window.innerWidth;
-const b = window.innerHeight / 2;
+const b = window.innerHeight * 0.9 / 2;
 const B = window.innerHeight;
 
 const getPointAlongEllipse = (iteration = 0) => {
@@ -13,8 +13,8 @@ const getPointAlongEllipse = (iteration = 0) => {
     b = vertical radius
   */
   const angle = (iteration % 360) * (Math.PI / 180);
-  const x = (a * Math.cos(angle) + a) / A;
-  const y = (b * Math.sin(angle) + b) / B;
+  const x = (a * Math.cos(angle) + a) / A + 0.05;
+  const y = (b * Math.sin(angle) + b) / B + 0.05;
   return {
     x, 
     y
@@ -89,6 +89,43 @@ const animate = (panels, iteration = 0) => {
       animate(panels, iteration + 1);
     }, INTERVAL);
   }
+};
+
+const keyframesToAnimationDefinition = (name, keyframes) => {
+  return `@keyframes ${name} { ${keyframes} }`
+};
+
+const constructCSSAnimations = () => {
+  const numberOfKeyframes = 100;
+  const baseObject = Array.from({ length : 4 }).map((_, index) => {
+    return {
+      outerAnimationName : `scale${index}outer`,
+      innerAnimationName : `scale${index}inner`,
+      outerKeyframes : '',
+      innerKeyframes : ''
+    }
+  });
+  const keyframes = Array.from({ length : numberOfKeyframes})
+    .reduce((acc, _, keyframeIndex) => {
+      const percentageValue = roundTo(keyframeIndex / (numberOfKeyframes - 1) * 100, 0);
+      const point = getPointAlongEllipse(keyframeIndex / numberOfKeyframes * 360);
+      const points = pointToPositions(point);
+      const scales = points.map(pointToScales);
+      scales.forEach(({ scale, inverseScale }, scaleIndex) => {
+        acc[scaleIndex].outerKeyframes += `${percentageValue}% { transform: scale(${scale}); }`;
+        acc[scaleIndex].innerKeyframes += `${percentageValue}% { transform: scale(${inverseScale}); }`;
+      });
+      return acc;
+    }, baseObject);
+  const animationCSS = keyframes.map((config) => {
+    const outerAnimation = keyframesToAnimationDefinition(config.outerAnimationName, config.outerKeyframes);
+    const innerAnimation = keyframesToAnimationDefinition(config.innerAnimationName, config.innerKeyframes);
+    return outerAnimation + innerAnimation;
+  }).join('');
+  const style = document.createElement('style');
+  style.innerHTML = animationCSS;
+  document.body.appendChild(style);
+
 }
 
 
@@ -100,7 +137,8 @@ const init = () => {
       inner
     };
   });
-  animate(panels);
+  // animate(panels);
+  constructCSSAnimations()
 };
 
 document.addEventListener('DOMContentLoaded', init);

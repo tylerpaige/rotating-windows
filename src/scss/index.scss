@@ -68,30 +68,30 @@ $colorPairs : (#B95E82, #B95E52), (#54ACC7, #9DB1FC), (#ADA13E, #5EA13E), (#173A
     transform-origin: bottom right;
   }
 
-  // &:nth-child(1) {
-  //   animation-name: topLeft;
-  //   .panel__inner {
-  //     animation-name: topLeftInverse;
-  //   }
-  // }
-  // &:nth-child(2) {
-  //   animation-name: topRight;
-  //   .panel__inner {
-  //     animation-name: topRightInverse;
-  //   }
-  // }
-  // &:nth-child(3) {
-  //   animation-name: bottomLeft;
-  //   .panel__inner {
-  //     animation-name: bottomLeftInverse;
-  //   }
-  // }
-  // &:nth-child(4) {
-  //   animation-name: bottomRight;
-  //   .panel__inner {
-  //     animation-name: bottomRightInverse;
-  //   }
-  // }
+  &:nth-child(1) {
+    animation-name: scale0outer;
+    .panel__inner {
+      animation-name: scale0inner;
+    }
+  }
+  &:nth-child(2) {
+    animation-name: scale1outer;
+    .panel__inner {
+      animation-name: scale1inner;
+    }
+  }
+  &:nth-child(3) {
+    animation-name: scale2outer;
+    .panel__inner {
+      animation-name: scale2inner;
+    }
+  }
+  &:nth-child(4) {
+    animation-name: scale3outer;
+    .panel__inner {
+      animation-name: scale3inner;
+    }
+  }
 }
 
 .panel__inner {
