@@ -35,8 +35,18 @@ $colorPairs : (#B95E82, #B95E52), (#54ACC7, #9DB1FC), (#ADA13E, #5EA13E), (#173A
     $colorPair : nth($colorPairs, $n);
     $colorA : nth($colorPair, 1);
     $colorB : nth($colorPair, 2);
-    &:nth-child(#{$n}) {
+    &:nth-child(#{$n}) .panel__content {
       background-color: $colorA;
+      animation: fade-#{$n} 3s linear alternate infinite;
+
+      @keyframes fade-#{$n} {
+        from {
+          background-color: $colorA;
+        }
+        to {
+          background-color: $colorB;
+        }
+      }
     }
   }
 
@@ -91,8 +101,8 @@ $colorPairs : (#B95E82, #B95E52), (#54ACC7, #9DB1FC), (#ADA13E, #5EA13E), (#173A
 
 .panel__content {
   width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
+  // max-width: 800px;
+  // margin: 0 auto;
   height: 100%;
 
   display: flex;

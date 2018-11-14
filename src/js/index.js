@@ -71,7 +71,7 @@ const animationNameToApplication = (name, index) => {
 };
 
 const createAnimations = () => {
-  const numberOfKeyframes = 50;
+  const numberOfKeyframes = 100;
   const points = Array.from({ length : numberOfKeyframes })
     .map((_, index) => getPointAlongEllipse(index / numberOfKeyframes * 360));
   /* An array of scales (which are arrays) */
