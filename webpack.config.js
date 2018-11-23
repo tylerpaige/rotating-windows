@@ -58,7 +58,10 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       filename : '../index.html',
-      template : 'src/templates/index.hbs'
+      template : 'src/templates/index.hbs',
+      options : {
+        foo : 'bar'
+      }
     }),
     new CopyWebpackPlugin([{
       from: 'src/img/',

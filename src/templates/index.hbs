@@ -2,12 +2,17 @@
 <html>
   <head></head>
   <body>
+    hello?
+    {{#each htmlWebpackPlugin.options.options }}
+      {{@key}}
+    {{/each}}
+    {{ foo }}
     <div id="debug"></div>
     <div class="container">
       {{> panel 'Open Flame'}}
       {{> panel 'An LGBTQ+ Comedy Night'}}
+      {{> panel 'Hosted by Sam Campbell, Simone Leitner, and Peter Valenti'}}
       {{> panel 'Every other Monday at Moodring'}}
-      {{> panel 'Hot!'}}
     </div>
   </body>
 </html>

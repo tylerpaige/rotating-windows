@@ -37,16 +37,16 @@ $colorPairs : (#B95E82, #B95E52), (#54ACC7, #9DB1FC), (#ADA13E, #5EA13E), (#173A
     $colorB : nth($colorPair, 2);
     &:nth-child(#{$n}) .panel__content {
       background-color: $colorA;
-    //   animation: fade-#{$n} 3s linear alternate infinite;
+      animation: fade-#{$n} 3s linear alternate infinite;
 
-    //   @keyframes fade-#{$n} {
-    //     from {
-    //       background-color: $colorA;
-    //     }
-    //     to {
-    //       background-color: $colorB;
-    //     }
-    //   }
+      @keyframes fade-#{$n} {
+        from {
+          background-color: $colorA;
+        }
+        to {
+          background-color: $colorB;
+        }
+      }
     }
   }
 
@@ -104,6 +104,7 @@ $colorPairs : (#B95E82, #B95E52), (#54ACC7, #9DB1FC), (#ADA13E, #5EA13E), (#173A
   // max-width: 800px;
   // margin: 0 auto;
   height: 100%;
+  padding: 10vw;
 
   display: flex;
   flex-direction: column;
@@ -112,4 +113,10 @@ $colorPairs : (#B95E82, #B95E52), (#54ACC7, #9DB1FC), (#ADA13E, #5EA13E), (#173A
   text-align: center;
   font-family: sans-serif;
   font-size: 45px;
+}
+
+@media screen and (max-width: 800px) {
+  .panel__content {
+    font-size: 28px;
+  }
 }
